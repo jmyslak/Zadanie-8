@@ -5,7 +5,6 @@ from Morse import encryption_Morse, decryption_Morse
 def main():
     parser = argparse.ArgumentParser(description="Narzędzie do szyfrowania i deszyfrowania plików.")
     
-    # 1. Definicja argumentów
     parser.add_argument("input_file", help="Plik wejściowy")
     parser.add_argument("output_file", help="Plik wyjściowy")
     
@@ -19,20 +18,17 @@ def main():
     
     parser.add_argument("-n", "--shift", type=int, default=3)
     
-    # Pobranie argumentów
+
     args = parser.parse_args()
 
-    # --- WSZYSTKO PONIŻEJ MUSI BYĆ WCIĘTE (Wewnątrz main) ---
-    # 2. Czytanie pliku
     with open(args.input_file, "r", encoding="utf-8") as f:
         tekst = f.read()
-    # 3. Wybór operacji
+  
     if args.encrypt:
         wynik = encryption_Caesar(tekst, args.shift) if args.caesar else encryption_Morse(tekst)
     else:
         wynik = decryption_Caesar(tekst, args.shift) if args.caesar else decryption_Morse(tekst)
 
-    # 4. Zapis do pliku
     with open(args.output_file, "w", encoding="utf-8") as f:
         f.write(wynik)
     
